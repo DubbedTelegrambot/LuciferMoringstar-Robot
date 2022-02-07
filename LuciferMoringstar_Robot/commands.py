@@ -49,25 +49,3 @@ async def start_message(bot, message):
         )
         return
    
-@LuciferMoringstar_Robot.on_message(Worker.private & Worker.command(["help"]))
-async def help(bot, message):
-    button = [[
-     InlineKeyboardButton("🏠 Home", callback_data="start"),
-     InlineKeyboardButton("About 😎", callback_data="about")
-     ]]
-    await message.reply_photo(
-        photo = choice(BOT_PICS),
-        caption=LuciferMoringstar.HELP_MSG.format(mention=message.from_user.mention),
-        reply_markup=InlineKeyboardMarkup(button))
-      
-@LuciferMoringstar_Robot.on_message(Worker.private & Worker.command(["about"]))
-async def about(bot, message):
-    button = [[
-     InlineKeyboardButton("🏠 Home", callback_data="start"),
-     InlineKeyboardButton("Close 🗑️", callback_data="close")
-     ]]  
-    await message.reply_photo(
-        photo = choice(BOT_PICS),
-        caption=LuciferMoringstar.ABOUT_MSG.format(mention=message.from_user.mention, bot_name=bot_info.BOT_NAME, bot_username=bot_info.BOT_USERNAME, dev_name=DEV_NAME),
-        reply_markup=InlineKeyboardMarkup(button))
-        
