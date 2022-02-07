@@ -216,10 +216,17 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                     await query.answer(url=f"https://t.me/{bot_info.BOT_USERNAME}?start=subscribe")
                     return
                 else:
+                    SHARE_LINK = "https://t.me/share/url?url=%E0%B4%A8%E0%B4%AE%E0%B4%B8%E0%B5%8D%E0%B4%95%E0%B4%BE%E0%B4%B0%E0%B4%82%20%E0%B4%8E%E0%B4%B2%E0%B5%8D%E0%B4%B2%E0%B4%BE%E0%B4%B5%E0%B5%BC%E0%B4%95%E0%B5%8D%E0%B4%95%E0%B5%81%E0%B4%82%20%E0%B4%B8%E0%B5%81%E0%B4%96%E0%B4%AE%E0%B4%BE%E0%B4%A3%E0%B5%8B%3F%0A%0A%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%E0%B4%AA%E0%B5%87%E0%B4%B0%E0%B5%8D%20Ghost%20Rider%0A%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20TG%20Username%20%40GhostRider_Robot%0A%E0%B4%A8%E0%B4%BF%E0%B4%99%E0%B5%8D%E0%B4%99%E0%B5%BE%20%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%20PM%E0%B5%BD%20%E0%B4%B5%E0%B4%A8%E0%B5%8D%E0%B4%A8%E0%B5%8D%20%E0%B4%A8%E0%B4%BF%E0%B4%99%E0%B5%8D%E0%B4%99%E0%B5%BE%E0%B4%95%E0%B5%8D%E0%B4%95%E0%B5%8D%20%E0%B4%86%E0%B4%B5%E0%B4%B6%E0%B5%8D%E0%B4%AF%E0%B4%AE%E0%B5%81%E0%B4%B3%E0%B5%8D%E0%B4%B3%20%E0%B4%AE%E0%B4%B2%E0%B4%AF%E0%B4%BE%E0%B4%B3%E0%B4%82%20%E0%B4%A1%E0%B4%AC%E0%B5%8D%E0%B4%AC%E0%B5%8D%20%E0%B4%9A%E0%B5%86%E0%B4%AF%E0%B5%8D%E0%B4%A4%20%E0%B4%B8%E0%B4%BF%E0%B4%A8%E0%B4%BF%E0%B4%AE%E0%B4%AF%E0%B5%81%E0%B4%9F%E0%B5%86%20%E0%B4%AA%E0%B5%87%E0%B4%B0%E0%B5%8D%20%E0%B4%9F%E0%B5%88%E0%B4%AA%E0%B5%8D%E0%B4%AA%E0%B5%8D%20%E0%B4%9A%E0%B5%86%E0%B4%AF%E0%B5%8D%E0%B4%A4%E0%B4%BE%E0%B5%BD%2C%20%E0%B4%9E%E0%B4%BE%E0%B5%BB%20%E0%B4%86%20%E0%B4%B8%E0%B4%BF%E0%B4%A8%E0%B4%BF%E0%B4%AE%20%E0%B4%89%E0%B4%A3%E0%B5%8D%E0%B4%9F%E0%B4%95%E0%B4%BF%E0%B5%BD%20%E0%B4%A4%E0%B5%87%E0%B4%B0%E0%B5%81%E0%B4%82...%21%0A%0A%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%A8%E0%B5%8D%20Ghost%20Rider%20Robot"
+                    buttons = [[
+                      InlineKeyboardButton("ഷെയർ", url=SHARE_LINK)
+                      ],[
+                      InlineKeyboardButton('🧑‍💻 How To Own 🧑‍💻', url='https://t.me/Mo_Tech_Group')
+                      ]]
                     await client.send_cached_media(
                         chat_id=query.from_user.id,
                         file_id=file_id,
-                        caption=f_caption
+                        caption=LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, file_size=size),
+                        reply_markup=InlineKeyboardMarkup(buttons)
                         )
                     await query.answer('🤖 Check PM, I have Sent Files In Pm 🤖',show_alert = True)
             except UserIsBlocked:
@@ -260,7 +267,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                 await client.send_cached_media(
                     chat_id=query.from_user.id,
                     file_id=file_id,
-                    caption=f_caption,
+                    caption=LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, file_size=size),
                     reply_markup=InlineKeyboardMarkup(buttons)
                     )
 
