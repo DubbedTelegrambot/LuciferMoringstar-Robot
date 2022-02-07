@@ -201,16 +201,8 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
             files = files_[0]
             title = files.file_name
             size=get_size(files.file_size)
-            f_caption=files.caption
-            if CUSTOM_FILE_CAPTION:
-                try:
-                    f_caption=CUSTOM_FILE_CAPTION.format(mention=query.from_user.mention, file_name=title, file_size=size, file_caption=f_caption)
-                except Exception as e:
-                        print(e)
-                f_caption=f_caption
-            if f_caption is None:
-                f_caption = LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, size=size)
-            
+
+            caption = LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, size=size)
             try:
                 if FORCES_SUB and not await is_subscribed(client, query):
                     await query.answer(url=f"https://t.me/{bot_info.BOT_USERNAME}?start=subscribe")
@@ -225,7 +217,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                     await client.send_cached_media(
                         chat_id=query.from_user.id,
                         file_id=file_id,
-                        caption=LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, size=size),
+                        caption=caption,
                         reply_markup=InlineKeyboardMarkup(buttons)
                         )
                     await query.answer('🤖 Check PM, I have Sent Files In Pm 🤖',show_alert = True)
@@ -246,7 +238,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
             filedetails = await get_file_details(file_id)
             for files in filedetails:
                 title = files.file_name
-                size=files.file_size
+                size=get_size(files.file_size)
                 f_caption=files.caption
                 if CUSTOM_FILE_CAPTION:
                     try:
