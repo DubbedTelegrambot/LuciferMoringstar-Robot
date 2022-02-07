@@ -2,8 +2,8 @@ import re, asyncio, random
 # from pyrogram import Client as LuciferMoringstar_Robot, filters as Worker
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from LuciferMoringstar_Robot.database._utils import get_size, split_list
-from LuciferMoringstar_Robot.database.autofilter_db import get_filter_results, get_poster
-from config import BUTTONS, bot_info, SPELL_MODE, SET_SPEL_M, SUPPORT, BOT_PICS
+from LuciferMoringstar_Robot.database.autofilter_db import get_filter_results
+from config import BUTTONS, bot_info, BOT_PICS
 from translation import LuciferMoringstar
 
 
@@ -14,6 +14,7 @@ async def group_filters(client, message):
     if 2 < len(message.text) < 50:    
         btn = []
         search = message.text
+        
         files = await get_filter_results(query=search)
         if files:
             for file in files:
@@ -23,21 +24,14 @@ async def group_filters(client, message):
                     [InlineKeyboardButton(text=f"{filename}", callback_data=f"lucifermoringstar_robot#{file_id}")]
                 )
         else:
-            if SPELL_MODE:
-                reply = search.replace(" ", '+')  
-                reply_markup = InlineKeyboardMarkup([[
-                 InlineKeyboardButton("🎗️ Google 🎗️", url=f"https://www.google.com/search?q={reply}")
-                 ],[
-                 InlineKeyboardButton("🔍IMDB", url=f"https://www.imdb.com/find?q={reply}"),
-                 InlineKeyboardButton("Wikipedia🔎", url=f"https://en.m.wikipedia.org/w/index.php?search={reply}")
-                 ]]  
-                )    
-                LuciferMoringstar_delete=await message.reply_text(
-                    text=SET_SPEL_M.format(query=search, mention=message.from_user.mention),
-                    reply_markup=reply_markup                 
+            LuciferMoringstar=await client.send_message(
+                chat_id = message.chat.id,
+                text=f"""നിങ്ങൾ ആവശ്യപ്പെട്ട {search} എന്ന സിനിമ മലയാളത്തിലേക്ക് മൊഴിമാറ്റം ചെയ്തിട്ടില്ല""",
+                parse_mode="html",
+                reply_to_message_id=message.message_id
                 )
-                await asyncio.sleep(60) 
-                await LuciferMoringstar_delete.delete()
+            await asyncio.sleep(30) # in seconds
+            await LuciferMoringstar.delete()
             return
         if not btn:
             return
@@ -59,19 +53,9 @@ async def group_filters(client, message):
                 [InlineKeyboardButton(text="🤖 CHECK MY PM 🤖", url=f"https://telegram.dog/{bot_info.BOT_USERNAME}")]
             )
 
-            imdb=await get_poster(search)
-            if imdb and imdb.get('poster'):
-                dell=await message.reply_photo(photo=imdb.get('poster'), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-                await asyncio.sleep(1000)
-                await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
-            elif imdb:
-                dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-                await asyncio.sleep(1000)
-                await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
-            else:
-                dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=message.chat.title), reply_markup=InlineKeyboardMarkup(buttons))
-                await asyncio.sleep(1000)
-                await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
+            dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=message.chat.title), reply_markup=InlineKeyboardMarkup(buttons))
+            await asyncio.sleep(1000)
+            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
             return
 
         data = BUTTONS[keyword]
@@ -88,19 +72,9 @@ async def group_filters(client, message):
             [InlineKeyboardButton(text="🤖 CHECK MY PM 🤖", url=f"https://telegram.dog/{bot_info.BOT_USERNAME}")]
         )
 
-        imdb=await get_poster(search)
-        if imdb and imdb.get('poster'):
-            dell=await message.reply_photo(photo=imdb.get('poster'), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-            await asyncio.sleep(1000)
-            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")         
-        elif imdb:
-            dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-            await asyncio.sleep(1000)
-            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
-        else:
-            dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=message.chat.title), reply_markup=InlineKeyboardMarkup(buttons))
-            await asyncio.sleep(1000)
-            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
+        dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=message.chat.title), reply_markup=InlineKeyboardMarkup(buttons))
+        await asyncio.sleep(1000)
+        await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
 
 
 
@@ -124,14 +98,14 @@ async def pm_autofilter(client, message):
                     [InlineKeyboardButton(text=f"{filename}", callback_data=f"pmfile#{file_id}")]
                 )
         else:
-            await message.reply_photo(
-                photo=random.choice(BOT_PICS),
-                caption=LuciferMoringstar.ADD_YOUR_GROUP,
-                reply_markup=InlineKeyboardMarkup([[
-                   InlineKeyboardButton("🔘 REQUEST HERE 🔘", url=f"{SUPPORT}")
-                   ]]
+            LuciferMoringstar=await client.send_message(
+                chat_id = message.chat.id,
+                text=f"""നിങ്ങൾ ആവശ്യപ്പെട്ട {search} എന്ന സിനിമ മലയാളത്തിലേക്ക് മൊഴിമാറ്റം ചെയ്തിട്ടില്ല""",
+                parse_mode="html",
+                reply_to_message_id=message.message_id
                 )
-            )
+            await asyncio.sleep(30) # in seconds
+            await LuciferMoringstar.delete()
             return
         if not btn:
             return
@@ -151,19 +125,9 @@ async def pm_autofilter(client, message):
             )
 
 
-            imdb=await get_poster(search)
-            if imdb and imdb.get('poster'):
-                dell=await message.reply_photo(photo=imdb.get('poster'), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-                await asyncio.sleep(1000)
-                await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
-            elif imdb:
-                dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-                await asyncio.sleep(1000)
-                await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
-            else:
-                dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=bot_info.BOT_NAME), reply_markup=InlineKeyboardMarkup(buttons))
-                await asyncio.sleep(1000)
-                await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
+            dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=bot_info.BOT_NAME), reply_markup=InlineKeyboardMarkup(buttons))
+            await asyncio.sleep(1000)
+            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
 
             return
 
@@ -178,16 +142,7 @@ async def pm_autofilter(client, message):
              InlineKeyboardButton("Close 🗑️", callback_data="close")]
         )
 
-        imdb=await get_poster(search)
-        if imdb and imdb.get('poster'):
-            dell=await message.reply_photo(photo=imdb.get('poster'), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-            await asyncio.sleep(1000)
-            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")         
-        elif imdb:
-            dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_1.format(mention=message.from_user.mention, query=search, title=imdb.get('title'), genres=imdb.get('genres'), year=imdb.get('year'), rating=imdb.get('rating'), url=imdb['url']), reply_markup=InlineKeyboardMarkup(buttons))
-            await asyncio.sleep(1000)
-            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
-        else:
-            dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=bot_info.BOT_NAME), reply_markup=InlineKeyboardMarkup(buttons))
-            await asyncio.sleep(1000)
-            await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
+      
+        dell=await message.reply_photo(photo=random.choice(BOT_PICS), caption=LuciferMoringstar.GET_MOVIE_2.format(query=search, mention=message.from_user.mention, chat=bot_info.BOT_NAME), reply_markup=InlineKeyboardMarkup(buttons))
+        await asyncio.sleep(1000)
+        await dell.edit(f"⚙️ Filter For {search} Closed 🗑️")
