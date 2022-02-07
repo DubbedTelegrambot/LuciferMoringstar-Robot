@@ -248,8 +248,11 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                         print(e)
                         f_caption=f_caption
                 if f_caption is None:
-                    f_caption = LuciferMoringstar.FILE_CAPTIONS
+                    f_caption = LuciferMoringstar.FILE_ക്യാപ്ഷൻസ്
+                SHARE_LINK = "https://t.me/share/url?url=%E0%B4%A8%E0%B4%AE%E0%B4%B8%E0%B5%8D%E0%B4%95%E0%B4%BE%E0%B4%B0%E0%B4%82%20%E0%B4%8E%E0%B4%B2%E0%B5%8D%E0%B4%B2%E0%B4%BE%E0%B4%B5%E0%B5%BC%E0%B4%95%E0%B5%8D%E0%B4%95%E0%B5%81%E0%B4%82%20%E0%B4%B8%E0%B5%81%E0%B4%96%E0%B4%AE%E0%B4%BE%E0%B4%A3%E0%B5%8B%3F%0A%0A%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%E0%B4%AA%E0%B5%87%E0%B4%B0%E0%B5%8D%20Ghost%20Rider%0A%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20TG%20Username%20%40GhostRider_Robot%0A%E0%B4%A8%E0%B4%BF%E0%B4%99%E0%B5%8D%E0%B4%99%E0%B5%BE%20%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%B1%E0%B5%86%20%20PM%E0%B5%BD%20%E0%B4%B5%E0%B4%A8%E0%B5%8D%E0%B4%A8%E0%B5%8D%20%E0%B4%A8%E0%B4%BF%E0%B4%99%E0%B5%8D%E0%B4%99%E0%B5%BE%E0%B4%95%E0%B5%8D%E0%B4%95%E0%B5%8D%20%E0%B4%86%E0%B4%B5%E0%B4%B6%E0%B5%8D%E0%B4%AF%E0%B4%AE%E0%B5%81%E0%B4%B3%E0%B5%8D%E0%B4%B3%20%E0%B4%AE%E0%B4%B2%E0%B4%AF%E0%B4%BE%E0%B4%B3%E0%B4%82%20%E0%B4%A1%E0%B4%AC%E0%B5%8D%E0%B4%AC%E0%B5%8D%20%E0%B4%9A%E0%B5%86%E0%B4%AF%E0%B5%8D%E0%B4%A4%20%E0%B4%B8%E0%B4%BF%E0%B4%A8%E0%B4%BF%E0%B4%AE%E0%B4%AF%E0%B5%81%E0%B4%9F%E0%B5%86%20%E0%B4%AA%E0%B5%87%E0%B4%B0%E0%B5%8D%20%E0%B4%9F%E0%B5%88%E0%B4%AA%E0%B5%8D%E0%B4%AA%E0%B5%8D%20%E0%B4%9A%E0%B5%86%E0%B4%AF%E0%B5%8D%E0%B4%A4%E0%B4%BE%E0%B5%BD%2C%20%E0%B4%9E%E0%B4%BE%E0%B5%BB%20%E0%B4%86%20%E0%B4%B8%E0%B4%BF%E0%B4%A8%E0%B4%BF%E0%B4%AE%20%E0%B4%89%E0%B4%A3%E0%B5%8D%E0%B4%9F%E0%B4%95%E0%B4%BF%E0%B5%BD%20%E0%B4%A4%E0%B5%87%E0%B4%B0%E0%B5%81%E0%B4%82...%21%0A%0A%E0%B4%8E%E0%B4%A8%E0%B5%8D%E0%B4%A8%E0%B5%8D%20Ghost%20Rider%20Robot"
                 buttons = [[
+                  InlineKeyboardButton("ഷെയർ", url=SHARE_LINK)
+                  ],[
                   InlineKeyboardButton('🧑‍💻 How To Own 🧑‍💻', url='https://t.me/Mo_Tech_Group')
                   ]]                 
                 
@@ -268,37 +271,39 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
         elif query.data == "start":
             if query.from_user.id not in ADMINS: 
                 buttons = [[
-                 InlineKeyboardButton("➕️ Add me to ➕️", url=f"http://t.me/{bot_info.BOT_USERNAME}?startgroup=true")
+                 InlineKeyboardButton("➕️ Add me to Your Chat ➕️", url=f"http://t.me/{bot_info.BOT_USERNAME}?startgroup=true")
                  ],[
-                 InlineKeyboardButton("ℹ️ Help", callback_data="help"),
-                 InlineKeyboardButton("😎 About", callback_data="about") 
+                 InlineKeyboardButton("ℹ️ നോട്ടീസ്സ്", callback_data="help"),
+                 InlineKeyboardButton("😎 എബൌട്ട്‌", callback_data="about") 
                  ],[
                  InlineKeyboardButton("🗳 Deploy", url="https://youtu.be/FCU_XJmyG_U"),
                  InlineKeyboardButton("🤖 Update", url="https://t.me/Mo_Tech_Group")
                  ]]
             else:
                 buttons = [[
-                 InlineKeyboardButton("➕️ Add me to ➕️", url=f"http://t.me/{bot_info.BOT_USERNAME}?startgroup=true")
+                 InlineKeyboardButton("➕️ Add me to Your Chat ➕️", url=f"http://t.me/{bot_info.BOT_USERNAME}?startgroup=true")
                  ],[
-                 InlineKeyboardButton("ℹ️ Help", callback_data="bot_owner"),
-                 InlineKeyboardButton("😎 About", callback_data="about") 
+                 InlineKeyboardButton("ℹ️ നോട്ടീസ്സ്", callback_data="bot_owner"),
+                 InlineKeyboardButton("😎 എബൌട്ട്‌", callback_data="about") 
                  ],[
-                 InlineKeyboardButton("🗳 Deploy", url="https://youtu.be/FCU_XJmyG_U"),
-                 InlineKeyboardButton("🤖 Update", url="https://t.me/Mo_Tech_Group")
+                 InlineKeyboardButton("🗳 ഡെപ്ലോയ്", url="https://youtu.be/FCU_XJmyG_U"),
+                 InlineKeyboardButton("🤖 അപ്ഡേറ്റ്", url="https://t.me/Mo_Tech_Group")
                  ]]               
             await query.message.edit(text=START_MSG.format(mention=query.from_user.mention, bot_name=bot_info.BOT_NAME, bot_username=bot_info.BOT_USERNAME), reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
 
         elif query.data == "help":
             buttons = [[
-              InlineKeyboardButton("🏠 Home", callback_data="start"),
-              InlineKeyboardButton("About 😎", callback_data="about")
+              InlineKeyboardButton("🔔 Enable Notification 🔔", url="https://t.me/GhostRider_Updates")
+              ],[
+              InlineKeyboardButton("🏠 ഹോം", callback_data="start"),
+              InlineKeyboardButton("എബൌട്ട്‌ 😎", callback_data="about")
               ]]               
             await query.message.edit(text=LuciferMoringstar.HELP_MSG.format(mention=query.from_user.mention), reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
 
         elif query.data == "about":
             buttons = [[
-             InlineKeyboardButton("🏠 Home", callback_data="start"),
-             InlineKeyboardButton("Close 🗑️", callback_data="close")
+             InlineKeyboardButton("🏠 ഹോം", callback_data="start"),
+             InlineKeyboardButton("ക്ലോസ് 🗑️", callback_data="close")
              ]]               
             await query.message.edit(text=LuciferMoringstar.ABOUT_MSG.format(mention=query.from_user.mention, bot_name=bot_info.BOT_NAME, bot_username=bot_info.BOT_USERNAME, dev_name=DEV_NAME), reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
 
