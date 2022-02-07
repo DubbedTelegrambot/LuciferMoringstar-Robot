@@ -220,7 +220,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                     buttons = [[
                       InlineKeyboardButton("ഷെയർ", url=SHARE_LINK)
                       ],[
-                      InlineKeyboardButton('🧑‍💻 How To Own 🧑‍💻', url='https://t.me/Mo_Tech_Group')
+                      InlineKeyboardButton('🧑‍💻 How To Own 🧑‍💻', url='https://youtu.be/FCU_XJmyG_U')
                       ]]
                     await client.send_cached_media(
                         chat_id=query.from_user.id,
@@ -260,7 +260,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                 buttons = [[
                   InlineKeyboardButton("ഷെയർ", url=SHARE_LINK)
                   ],[
-                  InlineKeyboardButton('🧑‍💻 How To Own 🧑‍💻', url='https://t.me/Mo_Tech_Group')
+                  InlineKeyboardButton('🧑‍💻 How To Own 🧑‍💻', url='https://youtu.be/FCU_XJmyG_U')
                   ]]                 
                 
                 await query.answer()
