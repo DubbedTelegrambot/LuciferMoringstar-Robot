@@ -3,7 +3,7 @@ import re, asyncio, random
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from LuciferMoringstar_Robot.database._utils import get_size, split_list
 from LuciferMoringstar_Robot.database.autofilter_db import get_filter_results
-from config import BUTTONS, bot_info, BOT_PICS
+from config import BUTTONS, bot_info, BOT_PICS, FORCES_SUB
 from translation import LuciferMoringstar
 
 
@@ -84,6 +84,42 @@ async def group_filters(client, message):
 
 #@LuciferMoringstar_Robot.on_message(Worker.text & Worker.private & Worker.incoming & Worker.chat(AUTH_GROUPS) if AUTH_GROUPS else Worker.text & Worker.group & Worker.incoming)
 async def pm_autofilter(client, message):
+    if message.text.startswith("/"):
+        return
+    if FORCES_SUB:
+        invite_link = await client.create_chat_invite_link(int(FORCES_SUB))
+        try:
+            user = await client.get_chat_member(int(FORCES_SUB), message.from_user.id)
+            if user.status == "kicked":
+                await client.send_message(
+                    chat_id=message.from_user.id,
+                    text="Sorry Sir, You are Banned to use me.",
+                    parse_mode="markdown",
+                    disable_web_page_preview=True
+                )
+                return
+        except UserNotParticipant:
+            await client.send_message(
+                chat_id=message.from_user.id,
+                text="**Please Join My Updates Channel to use this Bot!**",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("🤖 Join Updates Channel", url=invite_link.invite_link)
+                        ]
+                    ]
+                ),
+                parse_mode="markdown"
+            )
+            return
+        except Exception:
+            await client.send_message(
+                chat_id=message.from_user.id,
+                text="Something went Wrong.",
+                parse_mode="markdown",
+                disable_web_page_preview=True
+            )
+            return
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
     if 2 < len(message.text) < 50:    
