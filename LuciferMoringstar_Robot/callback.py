@@ -267,7 +267,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                 await client.send_cached_media(
                     chat_id=query.from_user.id,
                     file_id=file_id,
-                    caption=LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, file_size=size),
+                    caption=LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, size=size),
                     reply_markup=InlineKeyboardMarkup(buttons)
                     )
 
