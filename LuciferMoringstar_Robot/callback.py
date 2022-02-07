@@ -225,7 +225,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                     await client.send_cached_media(
                         chat_id=query.from_user.id,
                         file_id=file_id,
-                        caption=LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, file_size=size),
+                        caption=LuciferMoringstar.FILE_CAPTIONS.format(mention=query.from_user.mention, title=title, size=size),
                         reply_markup=InlineKeyboardMarkup(buttons)
                         )
                     await query.answer('🤖 Check PM, I have Sent Files In Pm 🤖',show_alert = True)
@@ -250,7 +250,7 @@ async def cb_handler(client: LuciferMoringstar_Robot, query):
                 f_caption=files.caption
                 if CUSTOM_FILE_CAPTION:
                     try:
-                        f_caption=CUSTOM_FILE_CAPTION.format(mention=query.from_user.mention, title=title, file_size=size, file_caption=f_caption)
+                        f_caption=CUSTOM_FILE_CAPTION.format(mention=query.from_user.mention, title=title, size=size, file_caption=f_caption)
                     except Exception as e:
                         print(e)
                         f_caption=f_caption
