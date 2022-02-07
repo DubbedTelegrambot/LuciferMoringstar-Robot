@@ -25,14 +25,14 @@ async def group_filters(client, message):
                     [InlineKeyboardButton(text=f"{filename}", callback_data=f"lucifermoringstar_robot#{file_id}")]
                 )
         else:
-            LuciferMoringstar=await client.send_message(
+            LuciferMoringstarDl=await client.send_message(
                 chat_id = message.chat.id,
                 text=f"""നിങ്ങൾ ആവശ്യപ്പെട്ട {search} എന്ന സിനിമ മലയാളത്തിലേക്ക് മൊഴിമാറ്റം ചെയ്തിട്ടില്ല""",
                 parse_mode="html",
                 reply_to_message_id=message.message_id
                 )
             await asyncio.sleep(30) # in seconds
-            await LuciferMoringstar.delete()
+            await LuciferMoringstarDl.delete()
             return
         if not btn:
             return
@@ -135,7 +135,7 @@ async def pm_autofilter(client, message):
                     [InlineKeyboardButton(text=f"{filename}", callback_data=f"pmfile#{file_id}")]
                 )
         else:
-            LuciferMoringstar=await client.send_message(
+            LuciferMoringstarDl=await client.send_message(
                 chat_id = message.chat.id,
                 text=f"""നിങ്ങൾ ആവശ്യപ്പെട്ട {search} എന്ന സിനിമ മലയാളത്തിലേക്ക് മൊഴിമാറ്റം ചെയ്തിട്ടില്ല""",
                 parse_mode="html",
