@@ -51,6 +51,6 @@ class LuciferMoringstar(object):
 **👤 Requested By**: {mention}
 **🎤 Language:** Malayalam
 **🔊 Available:** Dubbed Movies Only
-**📤 Uploaded By:** @GhostRider_Robot"""
+**📤 Uploaded By:** @GhostRider_Robot
 
 © **{chat}**"""
